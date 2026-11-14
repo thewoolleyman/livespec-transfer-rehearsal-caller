@@ -1,0 +1,19 @@
+name: call-rehearsal
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+jobs:
+  by-tag:
+    uses: thewoolleyman/livespec-transfer-rehearsal/.github/workflows/reusable.yml@v1
+    with: { caller_tag: v1 }
+  by-sha:
+    uses: thewoolleyman/livespec-transfer-rehearsal/.github/workflows/reusable.yml@6862264910e1e670ff078b182d75d766c316d6a8
+    with: { caller_tag: sha }
+  by-branch:
+    uses: thewoolleyman/livespec-transfer-rehearsal/.github/workflows/reusable.yml@master
+    with: { caller_tag: master }
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: thewoolleyman/livespec-transfer-rehearsal/probe-action@v1
